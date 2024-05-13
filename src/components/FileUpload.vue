@@ -1,5 +1,4 @@
 <script>
-// import { useImage } from '@/composables/useImage'
 export default {
   data() {
     return {
@@ -40,91 +39,119 @@ export default {
 </script>
 
 <template>
-  <div>
-    <div class="file-input-box">
-      <div class="wrapper-file-input">
-        <div class="input-box" @click="openFileInput">
-          <img src="@/assets/images/upload.svg" alt="upload icon" />
-          <h4>Faylni yuklang</h4>
-          <input ref="fileInput" type="file" hidden @change="handleFileChange" multiple />
-        </div>
-        <small>Files Supported: PDF, TEXT, DOC, DOCX, JPG, PNG, SVG</small>
+  <div class="file-input-box">
+    <div class="wrapper-file-input">
+      <div class="input-box" @click="openFileInput">
+        <img class="upload-icon" src="@/assets/images/upload.svg" alt="upload icon" />
+        <h4>Faylni yuklang</h4>
+        <input ref="fileInput" type="file" hidden @change="handleFileChange" multiple />
       </div>
+      <!-- <small>Files Supported: PDF, TEXT, DOC, DOCX, JPG, PNG, SVG</small> -->
+    </div>
 
-      <div class="wrapper-file-section">
-        <div class="selected-files" v-if="selectedFileNames.length">
-          <h5>Selected Files</h5>
-          <ul class="file-list" :style="selectedFileNames.length ? 'max-height:220px' : 'height:auto'">
-            <transition-group name="fade" class="selected-files">
-              <li class="item" v-for="(f, index) in selectedFileNames" :key="f.name">
-                <span class="name"> {{ f.name }} ({{ formatFileSize(f.size) }}) </span>
-                <div class="remove" @click="removeFile(index)">remove</div>
-              </li>
-            </transition-group>
-          </ul>
-        </div>
+    <div class="wrapper-file-section">
+      <div class="selected-files" v-if="selectedFileNames.length">
+        <ul class="file-list" :style="selectedFileNames.length ? 'max-height:220px' : 'height:auto'">
+          <li class="file-list__item" v-for="(f, index) in selectedFileNames" :key="f.name">
+            <!-- <span class="name"> {{ f.name }} ({{ formatFileSize(f.size) }}) </span> -->
+            <button @click="removeFile(index)" class="btn-file">
+              <img class="btn-file__img" src="@/assets/images/assign.svg" alt="remove file" />
+            </button>
+            <span class="name"> {{ f.name }} </span>
+            <button @click="removeFile(index)" class="btn-file">
+              <img class="btn-file__img" src="@/assets/images/close-btn.svg" alt="assign file" />
+            </button>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
 </template>
 
 <style scoped>
-:root {
-  --secondary: #1b2631;
+::-webkit-scrollbar {
+  width: 4px;
+  height: 6px;
 }
 
-.file-input-box {
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px #f0f0f0;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  background-color: #0000002a;
+  border-radius: 10px;
+}
+
+.wrapper-file-input {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  border-radius: 10px;
+  border-radius: 4px;
   width: 100%;
+  padding: 18px;
   height: auto;
   background-color: #ffffff;
+  color: #d9d9d9;
+  border: 1px dashed #cacaca;
+  margin-bottom: 24px;
 }
 
 .input-box {
-  padding: 20px;
   display: grid;
   place-items: center;
-  border: 2px dashed #cacaca;
-  border-radius: 5px;
-  margin-bottom: 5px;
   cursor: pointer;
 }
 
-small {
-  display: none;
-  font-size: 12px;
-  color: #a3a3a3;
+.upload-icon {
+  margin-bottom: 8px;
+  display: block;
 }
-h5 {
-  margin-bottom: 10px;
-}
+
 .file-list {
+  display: flex;
   overflow-y: auto;
   list-style-type: none;
-  padding: 0 10px 10px 0;
   margin: 0;
-  transition: 0.3s all ease-in-out;
 }
-.item {
+
+.file-list__item {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid #cacaca;
-  border-radius: 5px;
-  padding: 10px;
-  font-size: 14px;
+  background-color: #f0f0f0;
+  border-radius: 15px;
+  padding: 8px 16px;
+  font-size: 10px;
+  line-height: 12.19px;
+  font-weight: 600;
 }
-.item:not(:last-child) {
-  margin-bottom: 5px;
+
+.file-list__item:not(:last-child) {
+  margin-right: 18px;
 }
-.remove {
-  display: grid;
-  place-items: center;
-  color: #c0392b;
+
+.btn-file {
+  background-color: none;
+  border: none;
   cursor: pointer;
-  transition: 0.3s all ease-in-out;
+  display: flex;
+}
+
+.btn-file__img {
+  width: 12px;
+  height: 12px;
+}
+
+.name {
+  margin-left: 8px;
+  margin-right: 8px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  width: 60px;
+  white-space: nowrap;
+  color: #000000;
 }
 </style>

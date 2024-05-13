@@ -43,7 +43,7 @@ const task = reactive({
           placeholder="Description"
         ></textarea>
 
-        <file-upload />
+        <file-upload class="file-upload" />
 
         <div class="modal__btn-wrapper">
           <button @click="emit('close-modal')" class="modal__btn modal__btn--back">Orqaga</button>
@@ -102,6 +102,7 @@ const task = reactive({
 .modal__top {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 24px;
 }
 
 .modal__input-title {
@@ -113,6 +114,14 @@ const task = reactive({
 .modal__date {
   max-width: 228px;
   padding: 6px 12px;
+}
+
+.modal__description {
+  margin-bottom: 24px;
+}
+
+.file-upload {
+  margin-bottom: 24px;
 }
 
 input,
@@ -137,6 +146,7 @@ textarea::placeholder {
 .circle-wrapper {
   display: flex;
   align-items: center;
+  margin-bottom: 24px;
 }
 
 .circle {
