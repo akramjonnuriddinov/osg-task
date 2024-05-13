@@ -15,7 +15,7 @@ const openModal = () => {
 
 <template>
   <div>
-    <task-header />
+    <task-header @open-modal="openModal" />
     <div>
       <task-component @open-modal="openModal" />
     </div>

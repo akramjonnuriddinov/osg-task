@@ -4,12 +4,12 @@ import { useImage } from '@/composables/useImage'
 import { useTaskStore } from '@/store'
 import { v4 as uuidv4 } from 'uuid'
 import FileUpload from '@/components/FileUpload.vue'
+import BaseButton from '@/components/BaseButton.vue'
 
 const store = useTaskStore()
 const emit = defineEmits<{
   (event: 'close-modal'): void
 }>()
-
 const task = reactive({
   id: uuidv4(),
   title: '',
@@ -46,9 +46,9 @@ const task = reactive({
         <file-upload class="file-upload" />
 
         <div class="modal__btn-wrapper">
-          <button @click="emit('close-modal')" class="modal__btn modal__btn--back">Orqaga</button>
-          <button @click="store.addTask(task)" class="modal__btn modal__btn--add">Qo’shish</button>
-          <button v-if="false" @click="store.updateTask" class="modal__btn modal__btn--update">Saqlash</button>
+          <base-button @click="emit('close-modal')" color="#cbcbcb" class="modal__btn-back" />
+          <base-button @click="store.addTask(task)" text="Qo’shish" />
+          <base-button v-if="false" @click="store.updateTask(task)" text="Saqlash" />
         </div>
       </div>
     </div>
@@ -167,25 +167,7 @@ textarea::placeholder {
   justify-content: end;
 }
 
-.modal__btn {
-  border: none;
-  padding: 7px 24px 8px;
-  color: #ffffff;
-  border-radius: 4px;
-  line-height: 17.07px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.modal__btn--back {
+.modal__btn-back {
   margin-right: 24px;
-  background-color: #cbcbcb;
-}
-
-.modal__btn--add {
-  background-color: #39c54f;
-}
-.modal__btn--update {
-  background-color: #39c54f;
 }
 </style>

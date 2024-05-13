@@ -5,6 +5,10 @@ interface Weeks {
   name: string
 }
 
+const emit = defineEmits<{
+  (event: 'open-modal'): void
+}>()
+
 const weeks: Weeks[] = [
   {
     id: '1',
@@ -61,7 +65,9 @@ const weeks: Weeks[] = [
           </button>
         </div>
 
-        <button class="plus-btn"><img :src="useImage('plus-btn.svg')" alt="Add task" /></button>
+        <button @click="emit('open-modal')" class="plus-btn">
+          <img :src="useImage('plus-btn.svg')" alt="Add task" />
+        </button>
       </div>
       <ul class="weeks">
         <li v-for="week in weeks" :key="week.id" class="weeks__item">{{ week.name }}</li>

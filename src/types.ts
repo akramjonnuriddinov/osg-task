@@ -6,3 +6,8 @@ export interface Task {
   description: string
   file: string
 }
+
+export interface BaseButton {
+  color: string
+  text: string
+}
