@@ -48,7 +48,7 @@ const task = reactive({
         <div class="modal__btn-wrapper">
           <button @click="emit('close-modal')" class="modal__btn modal__btn--back">Orqaga</button>
           <button @click="store.addTask(task)" class="modal__btn modal__btn--add">Qo’shish</button>
-          <button @click="store.updateTask" class="modal__btn modal__btn--add">Update</button>
+          <button v-if="false" @click="store.updateTask" class="modal__btn modal__btn--update">Saqlash</button>
         </div>
       </div>
     </div>
@@ -90,6 +90,7 @@ const task = reactive({
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 }
 
 .modal__title {
@@ -158,5 +159,33 @@ textarea::placeholder {
 
 .circle {
   margin-right: 12px;
+}
+
+.modal__btn-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.modal__btn {
+  border: none;
+  padding: 7px 24px 8px;
+  color: #ffffff;
+  border-radius: 4px;
+  line-height: 17.07px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.modal__btn--back {
+  margin-right: 24px;
+  background-color: #cbcbcb;
+}
+
+.modal__btn--add {
+  background-color: #39c54f;
+}
+.modal__btn--update {
+  background-color: #39c54f;
 }
 </style>
