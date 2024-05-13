@@ -43,25 +43,25 @@ const weeks: Weeks[] = [
       <div class="month">
         <div class="month__btn-wrapper">
           <button class="month__btn">
-            <img class="month__btn-img" :src="useImage('left-btn.svg')" alt="" />
+            <img class="month__btn-img" :src="useImage('left-btn.svg')" alt="Month change left" />
           </button>
           <span class="month__btn-text">Sentabr</span>
           <button class="month__btn">
-            <img class="month__btn-img" :src="useImage('right-btn.svg')" alt="" />
+            <img class="month__btn-img" :src="useImage('right-btn.svg')" alt="Month change right" />
           </button>
         </div>
 
         <div class="month__btn-wrapper">
           <button class="month__btn">
-            <img class="month__btn-img" :src="useImage('left-btn.svg')" alt="" />
+            <img class="month__btn-img" :src="useImage('left-btn.svg')" alt="Year change left" />
           </button>
           <span class="month__btn-text">2024</span>
           <button class="month__btn">
-            <img class="month__btn-img" :src="useImage('right-btn.svg')" alt="" />
+            <img class="month__btn-img" :src="useImage('right-btn.svg')" alt="Year change right" />
           </button>
         </div>
 
-        <button class="plus-btn"><img :src="useImage('plus-btn.svg')" alt="" /></button>
+        <button class="plus-btn"><img :src="useImage('plus-btn.svg')" alt="Add task" /></button>
       </div>
       <ul class="weeks">
         <li v-for="week in weeks" :key="week.id" class="weeks__item">{{ week.name }}</li>

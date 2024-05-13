@@ -1,15 +1,23 @@
 import { defineStore } from "pinia"
+import type { Task } from '@/types'
 
-export const useCounterStore = defineStore('counter', {
+export const useTaskStore = defineStore('task', {
   state: () => ({
-    count: 0, name: 'Eduardo'
+    tasks: [] as Task[],
   }),
   getters: {
-    doubleCount: (state) => state.count * 2,
   },
   actions: {
-    increment() {
-      this.count++
+    addTask(task: Task) {
+      this.tasks.unshift(task)
     },
+    updateTask(task: Task) {
+      const index = this.tasks.findIndex((item: Task) => item.id === task.id)
+      this.tasks[index] = task
+    },
+    deleteTask(id: string) {
+      const index = this.tasks.findIndex((item: Task) => item.id === id)
+      this.tasks.splice(index, 1)
+    }
   },
 })

@@ -1,21 +1,21 @@
 <script setup lang="ts">
-// import { useCounterStore } from '@/store'
+import { useTaskStore } from '@/store'
 
-// const store = useCounterStore()
+const store = useTaskStore()
+
+const emit = defineEmits<{
+  (event: 'open-modal'): void
+}>()
 </script>
 
 <template>
-  <!-- <div>
-    {{ store.count }}
-  </div>
-  <button @click="store.increment">add</button> -->
   <div class="container">
     <div class="all-tasks">
-      <div v-for="i in 11" :key="i" class="task-wrapper">
+      <div class="task-wrapper">
         <span class="task-wrapper__day">1</span>
         <ul calss="tasks">
-          <li v-for="i in 5" :key="i" class="tasks__item">
-            <span>lorem ipsum</span>
+          <li v-for="task in store.tasks" :key="task.date" @click="emit('open-modal')" class="tasks__item">
+            <span>{{ task.title }}</span>
             <span class="circle"></span>
           </li>
         </ul>
