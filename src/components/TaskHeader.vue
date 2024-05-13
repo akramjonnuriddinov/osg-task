@@ -142,5 +142,7 @@ const weeks: Weeks[] = [
 
 .weeks__item {
   text-align: center;
+  max-width: 240px;
+  width: 100%;
 }
 </style>
