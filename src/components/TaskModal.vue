@@ -75,8 +75,8 @@ const statuses = [
         <file-upload class="file-upload" />
         <div class="modal__btn-wrapper">
           <base-button @click="emit('close-modal')" color="#cbcbcb" class="modal__btn-back" />
-          <base-button @click="store.addTask(task)" text="Qo’shish" />
-          <base-button v-if="false" @click="store.updateTask(task)" text="Saqlash" />
+          <base-button @click="store.addTask(task), emit('close-modal')" text="Qo’shish" />
+          <base-button v-if="false" @click="store.updateTask(task), emit('close-modal')" text="Saqlash" />
         </div>
       </div>
     </div>

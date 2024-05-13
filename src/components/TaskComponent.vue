@@ -16,7 +16,7 @@ const emit = defineEmits<{
         <ul calss="tasks">
           <li v-for="task in store.tasks" :key="task.date" @click="emit('open-modal')" class="tasks__item">
             <span>{{ task.title }}</span>
-            <span class="circle"></span>
+            <span class="circle" :style="{ backgroundColor: task.status }"></span>
           </li>
         </ul>
       </div>
@@ -67,7 +67,6 @@ const emit = defineEmits<{
 }
 
 .circle {
-  background-color: #e05454;
   width: 8px;
   height: 8px;
   border-radius: 100%;
