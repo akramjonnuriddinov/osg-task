@@ -1,5 +1,9 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import TaskHeader from '@/components/TaskHeader.vue'
+</script>
 
 <template>
-  <div></div>
+  <div>
+    <task-header />
+  </div>
 </template>

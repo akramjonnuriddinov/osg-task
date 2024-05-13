@@ -1,0 +1,27 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  color: #000000;
+  font-weight: 400;
+  font-family: Arial;
+  font-size: 12px;
+  line-height: 1;
+  background-color: #ffffff;
+}
+
+.container {
+  max-width: 1738px;
+  width: 100%;
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+ul {
+  list-style: none;
+}
