@@ -10,6 +10,8 @@ export const useTaskStore = defineStore('task', {
   actions: {
     addTask(task: Task) {
       this.tasks.unshift(task)
+      console.log(this.tasks)
+      // const [year, month, day] = this.tasks[0].date.split('-').map(Number)
     },
     updateTask(task: Task) {
       const index = this.tasks.findIndex((item: Task) => item.id === task.id)
@@ -18,6 +20,6 @@ export const useTaskStore = defineStore('task', {
     deleteTask(id: string) {
       const index = this.tasks.findIndex((item: Task) => item.id === id)
       this.tasks.splice(index, 1)
-    }
+    },
   },
 })

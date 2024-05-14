@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid'
 import FileUpload from '@/components/FileUpload.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import type { Task } from '@/types'
+import { statuses } from '@/constants'
 
 const store = useTaskStore()
 const emit = defineEmits<{
@@ -19,32 +20,6 @@ const task = reactive<Task>({
   file: '',
   status: '',
 })
-const statuses = [
-  {
-    id: '1',
-    color: '#E05454',
-  },
-  {
-    id: '2',
-    color: '#DE54E0',
-  },
-  {
-    id: '3',
-    color: '#39C54F',
-  },
-  {
-    id: '4',
-    color: '#5462E0',
-  },
-  {
-    id: '5',
-    color: '#E08F54',
-  },
-  {
-    id: '6',
-    color: '#E0CA54',
-  },
-]
 </script>
 
 <template>
