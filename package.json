@@ -9,9 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@types/npm": "^7.19.3",
+    "dayjs": "^1.11.11",
     "pinia": "^2.1.7",
     "uuid": "^9.0.1",
-    "vue": "^3.4.21"
+    "vue": "^3.4.21",
+    "vue-draggable": "^2.0.6"
   },
   "devDependencies": {
     "@types/node": "^20.12.11",
