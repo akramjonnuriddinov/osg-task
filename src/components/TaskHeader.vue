@@ -1,44 +1,10 @@
 <script setup lang="ts">
 import { useImage } from '@/composables/useImage'
-interface Weeks {
-  id: string
-  name: string
-}
+import { weeks } from '@/constants'
 
 const emit = defineEmits<{
   (event: 'open-modal'): void
 }>()
-
-const weeks: Weeks[] = [
-  {
-    id: '1',
-    name: 'Dushanba',
-  },
-  {
-    id: '2',
-    name: 'Seshanba',
-  },
-  {
-    id: '3',
-    name: 'Chorshanba',
-  },
-  {
-    id: '4',
-    name: 'Payshanba',
-  },
-  {
-    id: '5',
-    name: 'Juma',
-  },
-  {
-    id: '6',
-    name: 'Shanba',
-  },
-  {
-    id: '7',
-    name: 'Yakshanba',
-  },
-]
 </script>
 
 <template>
@@ -49,7 +15,7 @@ const weeks: Weeks[] = [
           <button class="month__btn">
             <img class="month__btn-img" :src="useImage('left-btn.svg')" alt="Month change left" />
           </button>
-          <span class="month__btn-text">Sentabr</span>
+          <span class="month__btn-text">{{ 'props.currentMonth' }}</span>
           <button class="month__btn">
             <img class="month__btn-img" :src="useImage('right-btn.svg')" alt="Month change right" />
           </button>
@@ -59,7 +25,7 @@ const weeks: Weeks[] = [
           <button class="month__btn">
             <img class="month__btn-img" :src="useImage('left-btn.svg')" alt="Year change left" />
           </button>
-          <span class="month__btn-text">2024</span>
+          <span class="month__btn-text">{{ 'props.currentYear' }}</span>
           <button class="month__btn">
             <img class="month__btn-img" :src="useImage('right-btn.svg')" alt="Year change right" />
           </button>
@@ -70,7 +36,7 @@ const weeks: Weeks[] = [
         </button>
       </div>
       <ul class="weeks">
-        <li v-for="week in weeks" :key="week.id" class="weeks__item">{{ week.name }}</li>
+        <li v-for="week in weeks" :key="week" class="weeks__item">{{ week }}</li>
       </ul>
     </div>
   </header>

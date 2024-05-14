@@ -74,15 +74,15 @@ const shiftMonth = function (amount: number) {
       <div class="all-tasks">
         <div v-for="p in daystoPrepend" :key="p"></div>
         <div class="task-wrapper" v-for="d in units">
-          <div :class="[d.isToday() ? 'bg-red-100' : '']" class="task-wrapper__day">
+          <div :class="[d.isToday() ? 'bg-red' : '']" class="task-wrapper__day">
             {{ d.format('D') }}
-            <ul calss="tasks">
-              <li v-for="task in store.tasks" :key="task.date" @click="emits('open-modal')" class="tasks__item">
-                <span>{{ task.title }}</span>
-                <span class="circle" :style="{ backgroundColor: task.status }"></span>
-              </li>
-            </ul>
           </div>
+          <ul calss="tasks">
+            <li v-for="task in store.tasks" :key="task.date" @dblclick="emits('open-modal')" class="tasks__item">
+              <span>{{ task.title }}</span>
+              <span class="circle" :style="{ backgroundColor: task.status }"></span>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
@@ -90,10 +90,13 @@ const shiftMonth = function (amount: number) {
 </template>
 
 <style scoped>
+.bg-red {
+  background-color: rgb(243, 213, 213);
+  border-radius: 4px;
+}
 .calendar {
   padding-top: 48px;
   padding-bottom: 48px;
-  border: 1px solid red;
 }
 
 .month {
@@ -181,7 +184,7 @@ const shiftMonth = function (amount: number) {
   width: 100%;
   display: flex;
   flex-direction: column;
-  height: 8rem;
+  height: 240px;
 }
 
 .task-wrapper__day {
@@ -198,6 +201,7 @@ const shiftMonth = function (amount: number) {
 }
 
 .tasks__item {
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: space-between;

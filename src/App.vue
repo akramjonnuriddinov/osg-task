@@ -1,9 +1,7 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-// import TaskHeader from '@/components/TaskHeader.vue'
-// import TaskComponent from '@/components/TaskComponent.vue'
+import TaskComponent from '@/components/TaskComponent.vue'
 import TaskModal from '@/components/TaskModal.vue'
-import Calendar from '@/components/Calendar.vue'
 
 const isShow = ref(false)
 const closeModal = () => {
@@ -15,14 +13,8 @@ const openModal = () => {
 </script>
 
 <template>
-  <div>
-    <!-- <task-header @open-modal="openModal" /> -->
-    <div>
-      <!-- <task-component @open-modal="openModal" /> -->
-      <Calendar @open-modal="openModal" />
-    </div>
-    <transition>
-      <task-modal v-if="isShow" @close-modal="closeModal" />
-    </transition>
-  </div>
+  <task-component @open-modal="openModal" />
+  <transition>
+    <task-modal v-if="isShow" @close-modal="closeModal" />
+  </transition>
 </template>
