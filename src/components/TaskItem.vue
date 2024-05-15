@@ -1,18 +1,38 @@
 <script setup lang="ts">
-defineProps(['tasks', 'date'])
 import { useTaskStore } from '@/store'
+
+const { tasks, date } = defineProps(['tasks', 'date'])
 const store = useTaskStore()
+
+const emits = defineEmits(['click-event-item', 'drag-start', 'drag-over', 'drop', 'open-modal'])
+
+const handleDragStart = (e: DragEvent, task: any) => {
+  emits('drag-start', e, task)
+}
+
+const handleDragOver = (index: number, event: DragEvent) => {
+  event.preventDefault()
+  emits('drag-over', index, event)
+}
+
+const handleDrop = (event: DragEvent) => {
+  event.preventDefault()
+  emits('drop', event)
+}
 </script>
 
 <template>
-  <div class="task-wrapper">
+  <div class="task-wrapper" @drop="handleDrop" @dragover="handleDragOver(-1, $event)">
     <span class="task-wrapper__day">{{ date.getDate() }}</span>
     <ul calss="tasks">
       <li
-        v-for="task in tasks"
+        v-for="(task, index) in tasks"
         :key="task.date"
         class="tasks__item"
-        @click="$emit('open-modal', task.id), store.updateId(task.id)"
+        draggable="true"
+        @dragstart="handleDragStart($event, task)"
+        @dragover="handleDragOver(index, $event)"
+        @click="$emit('open-modal', task.id), store.updateId(task.id), $emit('click-event-item', task.id)"
       >
         <span>{{ task.title }}</span>
         <span class="circle" :style="{ backgroundColor: task.status }"></span>

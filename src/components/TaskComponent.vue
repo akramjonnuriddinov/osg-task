@@ -13,7 +13,8 @@ const emit = defineEmits<{
 const currentMonth = ref<number>(new Date().getMonth())
 const currentYear = ref<number>(new Date().getFullYear())
 const currentDate = ref<Date>(new Date(currentYear.value, currentMonth.value))
-
+const showUpdate = ref<boolean>(false)
+const updateId = ref<number>(0)
 const getCurrentDays = (date: any) => {
   let firstDay = new Date(date.setDate(1)) //01.05.2024;
   const dayOfWeek = firstDay.getDay()
@@ -83,6 +84,31 @@ const filterByTime = (time: any) => {
 const openModal = () => {
   emit('open-modal')
 }
+
+const moveFromTo = (from: string, to: string) => {
+  const fromDate = new Date(from).toISOString()
+  const toDay = new Date(to).getDate()
+  const toMonth = new Date(to).getMonth()
+  const getHour = new Date(fromDate).getHours()
+  const getMinute = new Date(fromDate).getMinutes()
+  const item = store.tasks.find((task) => new Date(task.date).toISOString() === fromDate)
+  if (item) {
+    const movedDay = new Date(item.date).setDate(toDay)
+    const movedMonth = new Date(movedDay).setMonth(toMonth)
+    let movedHour = new Date(movedMonth).setHours(getHour, getMinute, 0, 0)
+    movedHour += 5 * 60 * 60 * 1000
+
+    item.date = new Date(movedHour).toISOString().slice(0, 16)
+  }
+}
+
+const startItem = ref<string>('')
+const dragStart = (data: any) => {
+  startItem.value = data.time
+}
+const drop = (data: any) => {
+  moveFromTo(startItem.value, data.day)
+}
 </script>
 
 <template>
@@ -127,6 +153,9 @@ const openModal = () => {
         :key="date.getDay"
         :tasks="filterByTime(date)"
         :date="date"
+        @drag-start="dragStart"
+        @click-event-item=";(updateId = $event), (showUpdate = true)"
+        @drop="drop"
       />
     </div>
   </div>
