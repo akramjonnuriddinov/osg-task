@@ -32,7 +32,7 @@ const task = reactive<Task>({
       <div class="modal__form">
         <div class="modal__top">
           <input v-model="task.title" class="modal__input-title" type="text" placeholder="Title" />
-          <input v-model="task.date" class="modal__date" type="date" />
+          <input v-model="task.date" class="modal__date" type="datetime-local" />
         </div>
         <ul class="status-wrapper">
           <li v-for="status in statuses" :key="status.id" class="status__item">
