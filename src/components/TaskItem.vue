@@ -29,7 +29,6 @@ const store = useTaskStore()
   max-width: 240px;
   width: 100%;
   height: 240px;
-  cursor: pointer;
 }
 
 .task-wrapper__day {
@@ -52,6 +51,7 @@ const store = useTaskStore()
   background-color: #f0f0f0;
   border-radius: 4px;
   padding: 4px 8px 5px;
+  cursor: pointer;
 }
 
 .tasks__item:not(:last-child) {

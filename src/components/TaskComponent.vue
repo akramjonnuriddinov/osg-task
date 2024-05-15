@@ -80,9 +80,8 @@ const filterByTime = (time: any) => {
   return sortedTime
 }
 
-const openModal = (id: any) => {
+const openModal = () => {
   emit('open-modal')
-  console.log('task-id', id)
 }
 </script>
 

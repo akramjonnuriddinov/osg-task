@@ -28,8 +28,6 @@ const task = ref<Task>({
   ...values,
 })
 
-console.log(store.id, values)
-
 const updateTask = () => {
   const taskIndex = store.tasks.findIndex((task) => task.id === store.id)
   if (taskIndex !== -1) {
@@ -40,15 +38,6 @@ const updateTask = () => {
     taskToUpdate.status = task.value.status
   }
 }
-
-// store.tasks[taskIndex] = {
-//   id: 'new-id',
-//   title: 'new-title',
-//   date: 'new-date',
-//   description: 'new-description',
-//   file: 'new-file',
-//   status: 'new-status',
-// }
 </script>
 
 <template>
@@ -80,7 +69,7 @@ const updateTask = () => {
         <div class="modal__btn-wrapper">
           <base-button @click="emit('close-modal')" color="#cbcbcb" class="modal__btn-back" />
           <base-button @click="store.addTask(task), emit('close-modal')" text="Qo’shish" />
-          <base-button @click="updateTask" text="Saqlash" />
+          <base-button @click="updateTask" text="Saqlash" class="modal__btn-update" />
         </div>
       </div>
     </div>
@@ -184,6 +173,10 @@ textarea::placeholder {
 
 .modal__btn-back {
   margin-right: 24px;
+}
+
+.modal__btn-update {
+  margin-left: 24px;
 }
 
 .status-wrapper {
