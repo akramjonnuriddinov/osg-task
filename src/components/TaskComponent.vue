@@ -14,20 +14,6 @@ const currentMonth = ref<number>(new Date().getMonth())
 const currentYear = ref<number>(new Date().getFullYear())
 const currentDate = ref<Date>(new Date(currentYear.value, currentMonth.value))
 
-// const allDays = (date: Date): number[] => {
-//   const firstDay = new Date(date.getFullYear(), date.getMonth(), 1)
-//   const dayOfWeek = firstDay.getDay()
-//   const startOfWeekOffset = (dayOfWeek === 0 ? -6 : 1) - dayOfWeek
-//   const startOfWeek = new Date(firstDay)
-//   startOfWeek.setDate(firstDay.getDate() + startOfWeekOffset)
-
-//   return Array.from({ length: 35 }, (_, i) => {
-//     const currentDate = new Date(startOfWeek)
-//     currentDate.setDate(startOfWeek.getDate() + i)
-//     return currentDate.getDate()
-//   })
-// }
-
 const getCurrentDays = (date: any) => {
   let firstDay = new Date(date.setDate(1)) //01.05.2024;
   const dayOfWeek = firstDay.getDay()
@@ -42,35 +28,6 @@ const getCurrentDays = (date: any) => {
   }
   return result
 }
-
-function changeDateTop(dateString: string): string {
-  let date = new Date(dateString)
-
-  // Adjust the date by adding 6 days
-  date.setDate(date.getDate() + 6)
-
-  // Adjust the time by adding 8 hours and 50 minutes
-  date.setHours(date.getHours() + 8)
-  date.setMinutes(date.getMinutes() + 50)
-
-  // Extract the components
-  let year = date.getFullYear()
-  let month = (date.getMonth() + 1).toString().padStart(2, '0') // Months are zero-indexed
-  let day = date.getDate().toString().padStart(2, '0')
-  let hours = date.getHours().toString().padStart(2, '0')
-  let minutes = date.getMinutes().toString().padStart(2, '0')
-
-  // Format the date string
-  let formattedDate = `${year}-${month}-${day}T${hours}:${minutes}`
-
-  return formattedDate
-}
-
-// Example usage
-let dateString: string = 'Thu May 09 2024 00:00:00 GMT+0500 (Uzbekistan Standard Time)'
-console.log(changeDateTop(dateString)) // Output: 2024-05-15T08:50
-
-// console.log(getCurrentDays(new Date()))
 
 const changeDate = () => {
   currentDate.value = new Date(currentYear.value, currentMonth.value)
@@ -100,6 +57,7 @@ const goToPreviousYear = () => {
   currentYear.value -= 1
   changeDate()
 }
+
 const goToNextYear = () => {
   currentYear.value += 1
   changeDate()
@@ -120,6 +78,11 @@ const filterByTime = (time: any) => {
     return dateA.getTime() - dateB.getTime()
   })
   return sortedTime
+}
+
+const openModal = (id: any) => {
+  emit('open-modal')
+  console.log('task-id', id)
 }
 </script>
 
@@ -161,6 +124,7 @@ const filterByTime = (time: any) => {
     <div class="all-tasks">
       <task-item
         v-for="date in getCurrentDays(currentDate)"
+        @open-modal="openModal"
         :key="date.getDay"
         :tasks="filterByTime(date)"
         :date="date"

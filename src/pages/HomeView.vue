@@ -14,7 +14,6 @@ const openModal = () => {
 
 <template>
   <task-component @open-modal="openModal" />
-  <transition>
-    <task-modal v-if="isShow" @close-modal="closeModal" />
-  </transition>
+  <task-modal v-if="isShow" @close-modal="closeModal" />
+  <transition> </transition>
 </template>

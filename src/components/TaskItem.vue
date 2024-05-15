@@ -1,12 +1,19 @@
 <script setup lang="ts">
 defineProps(['tasks', 'date'])
+import { useTaskStore } from '@/store'
+const store = useTaskStore()
 </script>
 
 <template>
   <div class="task-wrapper">
     <span class="task-wrapper__day">{{ date.getDate() }}</span>
     <ul calss="tasks">
-      <li v-for="task in tasks" :key="task.date" class="tasks__item">
+      <li
+        v-for="task in tasks"
+        :key="task.date"
+        class="tasks__item"
+        @click="$emit('open-modal', task.id), store.updateId(task.id)"
+      >
         <span>{{ task.title }}</span>
         <span class="circle" :style="{ backgroundColor: task.status }"></span>
       </li>
@@ -22,6 +29,7 @@ defineProps(['tasks', 'date'])
   max-width: 240px;
   width: 100%;
   height: 240px;
+  cursor: pointer;
 }
 
 .task-wrapper__day {

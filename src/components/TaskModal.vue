@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { ref } from 'vue'
 import { useImage } from '@/composables/useImage'
 import { useTaskStore } from '@/store'
 import { v4 as uuidv4 } from 'uuid'
@@ -12,7 +12,8 @@ const store = useTaskStore()
 const emit = defineEmits<{
   (event: 'close-modal'): void
 }>()
-const task = reactive<Task>({
+
+const initialTask = ref<Task>({
   id: uuidv4(),
   title: '',
   date: '',
@@ -20,6 +21,34 @@ const task = reactive<Task>({
   file: '',
   status: '',
 })
+
+const values = store.tasks.filter((item: any) => item.id === store.id)
+const task = ref<Task>({
+  ...initialTask.value,
+  ...values,
+})
+
+console.log(store.id, values)
+
+const updateTask = () => {
+  const taskIndex = store.tasks.findIndex((task) => task.id === store.id)
+  if (taskIndex !== -1) {
+    const taskToUpdate = store.tasks[taskIndex]
+    taskToUpdate.title = task.value.title
+    taskToUpdate.description = task.value.description
+    taskToUpdate.file = task.value.file
+    taskToUpdate.status = task.value.status
+  }
+}
+
+// store.tasks[taskIndex] = {
+//   id: 'new-id',
+//   title: 'new-title',
+//   date: 'new-date',
+//   description: 'new-description',
+//   file: 'new-file',
+//   status: 'new-status',
+// }
 </script>
 
 <template>
@@ -51,7 +80,7 @@ const task = reactive<Task>({
         <div class="modal__btn-wrapper">
           <base-button @click="emit('close-modal')" color="#cbcbcb" class="modal__btn-back" />
           <base-button @click="store.addTask(task), emit('close-modal')" text="Qo’shish" />
-          <base-button v-if="false" @click="store.updateTask(task), emit('close-modal')" text="Saqlash" />
+          <base-button @click="updateTask" text="Saqlash" />
         </div>
       </div>
     </div>
