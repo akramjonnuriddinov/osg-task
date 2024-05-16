@@ -36,14 +36,11 @@ const disabled = computed(() => {
 })
 
 const updateTask = () => {
-  const taskIndex = store.tasks.findIndex((task) => task.id === store.id)
-  if (taskIndex !== -1) {
-    const taskToUpdate = store.tasks[taskIndex]
-    taskToUpdate.title = task.value.title
-    taskToUpdate.description = task.value.description
-    taskToUpdate.file = task.value.file
-    taskToUpdate.status = task.value.status
-  }
+  store.updateTask({
+    ...task.value,
+    id: store.id,
+  })
+  emit('close-modal')
 }
 </script>
 
@@ -79,12 +76,7 @@ const updateTask = () => {
         <file-upload class="file-upload" />
         <div class="modal__btn-wrapper">
           <base-button @click="emit('close-modal')" color="#cbcbcb" class="modal__btn-back" />
-          <base-button
-            v-if="store.isUpdate"
-            :disabled="disabled"
-            @click="updateTask, emit('close-modal')"
-            text="Saqlash"
-          />
+          <base-button v-if="store.isUpdate" :disabled="disabled" @click="updateTask" text="Saqlash" />
           <base-button v-else :disabled="disabled" @click="store.addTask(task), emit('close-modal')" text="Qo’shish" />
         </div>
       </div>

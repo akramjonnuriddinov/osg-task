@@ -20,6 +20,12 @@ export const useTaskStore = defineStore('task', {
     updateId(id: string) {
       this.id = id
       console.log(this.id)
+    },
+    updateTask(updatedTask: Task) {
+      const taskIndex = this.tasks.findIndex((task: Task) => task.id === updatedTask.id)
+      if (taskIndex !== -1) {
+        this.tasks[taskIndex] = { ...updatedTask }
+      }
     }
   },
 })

@@ -12,6 +12,7 @@ const closeModal = () => {
 const openModal = () => {
   isShow.value = true
   store.isUpdate = false
+  store.id = ''
 }
 </script>
 
