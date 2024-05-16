@@ -3,7 +3,7 @@ export interface Task {
   title: string
   date: string
   description: string
-  file: string
+  files: File[] | null
   status: string
 }
 

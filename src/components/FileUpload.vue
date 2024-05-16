@@ -1,43 +1,3 @@
-<script>
-export default {
-  data() {
-    return {
-      selectedFileNames: [],
-    }
-  },
-  methods: {
-    openFileInput() {
-      this.$refs.fileInput.click()
-    },
-    handleFileChange(event) {
-      const fileList = event.target.files
-      const files = []
-
-      for (let i = 0; i < fileList.length; i++) {
-        this.selectedFileNames.push({
-          name: fileList[i].name,
-          size: fileList[i].size,
-        })
-      }
-    },
-    formatFileSize(size) {
-      const units = ['B', 'KB', 'MB', 'GB']
-      let index = 0
-
-      while (size >= 1024 && index < units.length - 1) {
-        size /= 1024
-        index++
-      }
-
-      return `${size.toFixed(2)} ${units[index]}`
-    },
-    removeFile(index) {
-      this.selectedFileNames.splice(index, 1)
-    },
-  },
-}
-</script>
-
 <template>
   <div class="file-input-box">
     <div class="wrapper-file-input">
@@ -65,6 +25,51 @@ export default {
   </div>
 </template>
 
+<script lang="ts">
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  name: 'FileUpload',
+  emits: ['files-uploaded'],
+  data() {
+    return {
+      selectedFileNames: [] as any,
+    }
+  },
+  methods: {
+    openFileInput() {
+      ;(this.$refs.fileInput as HTMLInputElement).click()
+    },
+    handleFileChange(event: Event) {
+      const target = event.target as HTMLInputElement
+      const fileList = target.files
+      if (fileList) {
+        const files: File[] = []
+        for (let i = 0; i < fileList.length; i++) {
+          files.push(fileList[i])
+          this.selectedFileNames.push({
+            name: fileList[i].name,
+            size: fileList[i].size,
+          })
+        }
+        this.$emit('files-uploaded', files)
+      }
+    },
+    formatFileSize(size: number) {
+      const units = ['B', 'KB', 'MB', 'GB'] as any
+      let index = 0
+      while (size >= 1024 && index < units.length - 1) {
+        size /= 1024
+        index++
+      }
+      return `${size.toFixed(2)} ${units[index]}`
+    },
+    removeFile(index: number) {
+      this.selectedFileNames.splice(index, 1)
+    },
+  },
+})
+</script>
 <style scoped>
 ::-webkit-scrollbar {
   width: 4px;

@@ -19,7 +19,7 @@ const initialTask = ref<Task>({
   title: '',
   date: '',
   description: '',
-  file: 'test',
+  files: null,
   status: '',
 })
 
@@ -41,6 +41,10 @@ const updateTask = () => {
     id: store.id,
   })
   emit('close-modal')
+}
+
+const onFilesUploaded = (files: File[]) => {
+  task.value.files = files
 }
 </script>
 
@@ -73,7 +77,7 @@ const updateTask = () => {
           rows="10"
           placeholder="Description"
         ></textarea>
-        <file-upload class="file-upload" />
+        <file-upload class="file-upload" @files-uploaded="onFilesUploaded" />
         <div class="modal__btn-wrapper">
           <base-button @click="emit('close-modal')" color="#cbcbcb" class="modal__btn-back" />
           <base-button v-if="store.isUpdate" :disabled="disabled" @click="updateTask" text="Saqlash" />
