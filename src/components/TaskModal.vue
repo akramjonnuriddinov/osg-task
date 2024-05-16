@@ -78,7 +78,12 @@ const updateTask = () => {
         <div class="modal__btn-wrapper">
           <base-button @click="emit('close-modal')" color="#cbcbcb" class="modal__btn-back" />
           <base-button :disabled="disabled" @click="store.addTask(task), emit('close-modal')" text="Qo’shish" />
-          <base-button @click="updateTask" text="Saqlash" class="modal__btn-update" />
+          <base-button
+            :disabled="disabled"
+            @click="updateTask, emit('close-modal')"
+            text="Saqlash"
+            class="modal__btn-update"
+          />
         </div>
       </div>
     </div>
