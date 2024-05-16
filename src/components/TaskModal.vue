@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 import { useImage } from '@/composables/useImage'
 import { useTaskStore } from '@/store'
 import { v4 as uuidv4 } from 'uuid'
@@ -7,6 +7,7 @@ import FileUpload from '@/components/FileUpload.vue'
 import BaseButton from '@/components/BaseButton.vue'
 import type { Task } from '@/types'
 import { statuses } from '@/constants'
+import { isDisabled } from '@/composables/isDisabled'
 
 const store = useTaskStore()
 const emit = defineEmits<{
@@ -18,7 +19,7 @@ const initialTask = ref<Task>({
   title: '',
   date: '',
   description: '',
-  file: '',
+  file: 'test',
   status: '',
 })
 
@@ -26,6 +27,10 @@ const values = store.tasks.filter((item: any) => item.id === store.id)
 const task = ref<Task>({
   ...initialTask.value,
   ...values,
+})
+
+const disabled = computed(() => {
+  return isDisabled(task.value)
 })
 
 const updateTask = () => {
@@ -72,7 +77,7 @@ const updateTask = () => {
         <file-upload class="file-upload" />
         <div class="modal__btn-wrapper">
           <base-button @click="emit('close-modal')" color="#cbcbcb" class="modal__btn-back" />
-          <base-button @click="store.addTask(task), emit('close-modal')" text="Qo’shish" />
+          <base-button :disabled="disabled" @click="store.addTask(task), emit('close-modal')" text="Qo’shish" />
           <base-button @click="updateTask" text="Saqlash" class="modal__btn-update" />
         </div>
       </div>

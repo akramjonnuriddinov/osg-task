@@ -21,4 +21,9 @@ const props = withDefaults(defineProps<BaseButton>(), {
   cursor: pointer;
   background-color: v-bind(color);
 }
+
+.modal__btn:disabled {
+  background-color: #413e3e;
+  cursor: not-allowed;
+}
 </style>
