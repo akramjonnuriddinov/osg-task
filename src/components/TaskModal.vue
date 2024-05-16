@@ -54,8 +54,12 @@ const updateTask = () => {
         </div>
         <ul class="status-wrapper">
           <li v-for="status in statuses" :key="status.id" class="status__item">
-            <input v-model="task.status" :value="status.color" :id="status.color" type="radio" />
-            <label :for="status.color" :class="{ 'custom-color': task.status === status.color }"></label>
+            <span
+              @click="task.status = status.color"
+              class="status-inner"
+              :style="{ backgroundColor: status.color }"
+              :class="{ 'active-color': task.status === status.color }"
+            ></span>
           </li>
         </ul>
         <textarea
@@ -77,6 +81,9 @@ const updateTask = () => {
 </template>
 
 <style scoped>
+.active-color {
+  border: 2px solid black;
+}
 .modal {
   position: fixed;
   width: 100%;
@@ -191,59 +198,10 @@ textarea::placeholder {
 }
 
 .status-inner {
-  background-color: #e05454;
-  width: 12px;
-  height: 12px;
+  width: 16px;
+  height: 16px;
   display: inline-block;
   border-radius: 100%;
-}
-
-[type='radio']:checked,
-[type='radio']:not(:checked) {
-  position: absolute;
-  left: -9999px;
-}
-[type='radio']:checked + label,
-[type='radio']:not(:checked) + label {
-  position: relative;
-  padding-left: 28px;
   cursor: pointer;
-  line-height: 20px;
-  display: inline-block;
-  color: #666;
-}
-[type='radio']:checked + label:before,
-[type='radio']:not(:checked) + label:before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 18px;
-  height: 18px;
-  border: 1px solid #ddd;
-  border-radius: 100%;
-}
-[type='radio']:checked + label:after,
-[type='radio']:not(:checked) + label:after {
-  content: '';
-  width: 12px;
-  height: 12px;
-  background: green;
-  position: absolute;
-  top: 4px;
-  left: 4px;
-  border-radius: 100%;
-  -webkit-transition: all 0.2s ease;
-  transition: all 0.2s ease;
-}
-[type='radio']:not(:checked) + label:after {
-  opacity: 0;
-  -webkit-transform: scale(0);
-  transform: scale(0);
-}
-[type='radio']:checked + label:after {
-  opacity: 1;
-  -webkit-transform: scale(1);
-  transform: scale(1);
 }
 </style>

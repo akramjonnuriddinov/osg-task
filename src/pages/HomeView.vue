@@ -3,7 +3,7 @@ import { ref } from 'vue'
 import TaskComponent from '@/components/TaskComponent.vue'
 import TaskModal from '@/components/TaskModal.vue'
 
-const isShow = ref(false)
+const isShow = ref(true)
 const closeModal = () => {
   isShow.value = false
 }
