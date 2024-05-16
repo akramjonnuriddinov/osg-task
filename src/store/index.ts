@@ -4,7 +4,8 @@ import type { Task } from '@/types'
 export const useTaskStore = defineStore('task', {
   state: () => ({
     tasks: [] as Task[],
-    id: '' as string
+    id: '' as string,
+    isUpdate: false
   }),
   getters: {
   },
@@ -18,6 +19,7 @@ export const useTaskStore = defineStore('task', {
     },
     updateId(id: string) {
       this.id = id
+      console.log(this.id)
     }
   },
 })

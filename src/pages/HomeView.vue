@@ -2,13 +2,16 @@
 import { ref } from 'vue'
 import TaskComponent from '@/components/TaskComponent.vue'
 import TaskModal from '@/components/TaskModal.vue'
+import { useTaskStore } from '@/store'
 
-const isShow = ref(true)
+const store = useTaskStore()
+const isShow = ref(false)
 const closeModal = () => {
   isShow.value = false
 }
 const openModal = () => {
   isShow.value = true
+  store.isUpdate = false
 }
 </script>
 

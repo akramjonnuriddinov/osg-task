@@ -79,13 +79,13 @@ const updateTask = () => {
         <file-upload class="file-upload" />
         <div class="modal__btn-wrapper">
           <base-button @click="emit('close-modal')" color="#cbcbcb" class="modal__btn-back" />
-          <base-button :disabled="disabled" @click="store.addTask(task), emit('close-modal')" text="Qo’shish" />
           <base-button
+            v-if="store.isUpdate"
             :disabled="disabled"
             @click="updateTask, emit('close-modal')"
             text="Saqlash"
-            class="modal__btn-update"
           />
+          <base-button v-else :disabled="disabled" @click="store.addTask(task), emit('close-modal')" text="Qo’shish" />
         </div>
       </div>
     </div>
@@ -192,10 +192,6 @@ textarea::placeholder {
 
 .modal__btn-back {
   margin-right: 24px;
-}
-
-.modal__btn-update {
-  margin-left: 24px;
 }
 
 .status-wrapper {

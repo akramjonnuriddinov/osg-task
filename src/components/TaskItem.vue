@@ -32,7 +32,12 @@ const handleDrop = (event: DragEvent) => {
         draggable="true"
         @dragstart="handleDragStart($event, task)"
         @dragover="handleDragOver(index, $event)"
-        @click="$emit('open-modal', task.id), store.updateId(task.id), $emit('click-event-item', task.id)"
+        @click="
+          $emit('open-modal', task.id),
+            store.updateId(task.id),
+            $emit('click-event-item', task.id),
+            (store.isUpdate = true)
+        "
       >
         <span>{{ task.title }}</span>
         <span class="circle" :style="{ backgroundColor: task.status }"></span>
