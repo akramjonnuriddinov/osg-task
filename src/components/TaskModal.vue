@@ -23,10 +23,12 @@ const initialTask = ref<Task>({
   status: '',
 })
 
-const values = store.tasks.filter((item: any) => item.id === store.id)
+const taskUpdate = ref<Task>()
+taskUpdate.value = store.tasks.filter((item: any) => item.id === store.id)[0]
+
 const task = ref<Task>({
   ...initialTask.value,
-  ...values,
+  ...taskUpdate.value,
 })
 
 const disabled = computed(() => {

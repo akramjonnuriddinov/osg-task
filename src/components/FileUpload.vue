@@ -46,14 +46,11 @@ export default {
         <h4>Faylni yuklang</h4>
         <input ref="fileInput" type="file" hidden @change="handleFileChange" multiple />
       </div>
-      <!-- <small>Files Supported: PDF, TEXT, DOC, DOCX, JPG, PNG, SVG</small> -->
     </div>
-
     <div class="wrapper-file-section">
       <div class="selected-files" v-if="selectedFileNames.length">
         <ul class="file-list" :style="selectedFileNames.length ? 'max-height:220px' : 'height:auto'">
           <li class="file-list__item" v-for="(f, index) in selectedFileNames" :key="f.name">
-            <!-- <span class="name"> {{ f.name }} ({{ formatFileSize(f.size) }}) </span> -->
             <button @click="removeFile(index)" class="btn-file">
               <img class="btn-file__img" src="@/assets/images/assign.svg" alt="remove file" />
             </button>
